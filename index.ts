@@ -1,11 +1,11 @@
 import { question } from 'readline-sync'
 
-type Operator = '+' | '-' | '*' | '/'
+type Operator = '+' | '-' | '*' | '/' | '%' | '^' | 'root'
 
 function main():void {
 
     const firstStr: string = question('Enter first number:\n')
-    const operator: string = question('Enter operator:\n')
+    const operator: string = question('Enter operator(+,-,*,/,%,^,root):\n')
     const secondStr: string = question('Enter second number:\n')
     
     const validInput: boolean = isNumber(firstStr) && isOperator(operator) && isNumber(secondStr)
@@ -31,6 +31,12 @@ function calculate(firstNum: number, operator: Operator, secondNum: number){
             return firstNum * secondNum
         case "/":
             return firstNum / secondNum
+        case "%":
+            return firstNum % secondNum
+        case "^":
+            return Math.pow(firstNum, secondNum)
+        case "root":
+            return Math.pow(firstNum, 1 / secondNum)
     }
 }
 
@@ -41,6 +47,9 @@ function isOperator(operator: string): boolean {
         case "-":
         case "*":
         case "/":
+        case "%":
+        case "^":
+        case "root":
             return true
         default:
             return false
